@@ -111,14 +111,15 @@ module.exports = {
 			options: {
 				headers: {},
 				allPageHeaders: [
-					'Strict-Transport-Security: max-age=31536000; includeSubDomains; preload',
-					'Expect-CT: enforce,max-age=604800',
-					'Cache-Control: public, max-age=360000',
-					"Content-Security-Policy: frame-src 'self'",
-					"Feature-Policy: sync-xhr 'none'; microphone 'none'; magnetometer 'none'; gyroscope 'none'; speaker 'none'; payment 'none'; camera 'none';",
-					'Referrer-Policy: same-origin',
-					'X-Frame-Options: DENY',
-					'X-Content-Type-Options: nosniff'
+					`Cache-Control: public, max-age=360000`,
+					`Content-Security-Policy: frame-src 'self';`,
+					`Content-Security-Policy-Report-Only: report-uri ${process.env.SENTRY_SECURITY_HEADERS}`,
+					`Expect-CT: enforce,max-age=604800,report-uri="${process.env.SENTRY_SECURITY_HEADERS}"`,
+					`Feature-Policy: sync-xhr 'none'; microphone 'none'; magnetometer 'none'; gyroscope 'none'; speaker 'none'; payment 'none'; camera 'none';`,
+					`Strict-Transport-Security: max-age=31536000; includeSubDomains; preload`,
+					`Referrer-Policy: same-origin`,
+					`X-Frame-Options: DENY`,
+					`X-Content-Type-Options: nosniff`
 					// "X-Xss-Protection: 1; mode=block", //enabled by the plugin
 				],
 				mergeSecurityHeaders: true,
