@@ -7,7 +7,7 @@ const Footer = styled.footer`
     display: grid;
 `;
 
-const Copyright = styled.p`
+const Copyright = styled.div`
     text-align: center;
     font-size: 12px;
     margin-top: 10px;
