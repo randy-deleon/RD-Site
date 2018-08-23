@@ -87,15 +87,6 @@ module.exports = {
 			}
 		},
 		{
-			resolve: 'gatsby-plugin-sentry',
-			options: {
-				dsn: process.env.SENTRY_DSN,
-				config: {
-					environment: 'production'
-				}
-			}
-		},
-		{
 			resolve: `gatsby-plugin-google-analytics`,
 			options: {
 				trackingId: process.env.GOOGLE_ANALYTICS,
