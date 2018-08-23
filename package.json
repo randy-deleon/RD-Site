@@ -1,0 +1,57 @@
+{
+  "name": "rd-site",
+  "description": "My site base of contentful gatsby blog starterkit ",
+  "version": "1.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "babel-plugin-styled-components": "^1.5.1",
+    "contentful-import": "^7.2.0",
+    "gatsby-cli": "^1.1.58",
+    "gatsby-image": "^1.0.54",
+    "gatsby-link": "^1.6.34",
+    "gatsby-plugin-google-analytics": "^1.0.31",
+    "gatsby-plugin-manifest": "^1.0.27",
+    "gatsby-plugin-netlify": "^1.0.21",
+    "gatsby-plugin-offline": "^1.0.18",
+    "gatsby-plugin-react-helmet": "^1.0.8",
+    "gatsby-plugin-react-next": "^1.0.11",
+    "gatsby-plugin-robots-txt": "^1.0.2",
+    "gatsby-plugin-sentry": "^0.1.0",
+    "gatsby-plugin-sharp": "^1.6.48",
+    "gatsby-plugin-sitemap": "^1.2.25",
+    "gatsby-plugin-styled-components": "^2.0.11",
+    "gatsby-remark-emoji": "0.0.2",
+    "gatsby-source-contentful": "^1.3.38",
+    "gatsby-transformer-remark": "^1.7.44",
+    "gatsby-transformer-sharp": "^1.6.27",
+    "inquirer": "^5.1.0",
+    "lodash": "^4.17.4",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "rimraf": "^2.6.2",
+    "styled-components": "^3.4.0",
+    "yargs-parser": "^10.0.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.1",
+    "babel-preset-env": "^1.7.0",
+    "chalk": "^2.3.1",
+    "eslint": "^4.15.0",
+    "eslint-plugin-react": "^7.5.1",
+    "gatsby": "^1.9.277"
+  },
+  "keywords": [
+    "gatsby",
+    "contentful",
+    "netlify"
+  ],
+  "scripts": {
+    "dev": "gatsby develop",
+    "prd": "gatsby build",
+    "serve": "gatsby build && gatsby serve",
+    "build": "npm run clean && npm run prd ",
+    "lint": "eslint --ext .js,.jsx --ignore-pattern public .",
+    "clean": "rimraf ./public/*",
+    "fix-semi": "eslint --quiet --ignore-pattern node_modules --ignore-pattern public --parser babel-eslint --no-eslintrc --rule '{\"semi\": [2, \"never\"], \"no-extra-semi\": [2]}' --fix *.js bin/*.js"
+  }
+}
