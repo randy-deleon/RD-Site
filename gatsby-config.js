@@ -9,10 +9,7 @@ try {
 		accessToken: process.env.CONTENTFUL_DELIVERY_TOKEN
 	};
 } finally {
-	const {
-		spaceId,
-		accessToken
-	} = contentfulConfig;
+	const { spaceId, accessToken } = contentfulConfig;
 
 	if (!spaceId || !accessToken) {
 		throw new Error('Contentful spaceId and the delivery token need to be provided.');
@@ -37,7 +34,7 @@ module.exports = {
 		{
 			resolve: `gatsby-transformer-remark`,
 			options: {
-				plugins: ['gatsby-remark-emoji']
+				plugins: [ 'gatsby-remark-emoji' ]
 			}
 		},
 		{
@@ -80,11 +77,16 @@ module.exports = {
 			options: {
 				host: 'https://randydeleon.com',
 				sitemap: 'https://randydeleon.com/sitemap.xml',
-				policy: [{
-					userAgent: '*',
-					allow: '/'
-				}]
+				policy: [
+					{
+						userAgent: '*',
+						allow: '/'
+					}
+				]
 			}
+		},
+		{
+			resolve: `gatsby-plugin-feed`
 		},
 		{
 			resolve: `gatsby-plugin-google-analytics`,
