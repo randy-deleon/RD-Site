@@ -20,7 +20,6 @@ try {
 }
 
 module.exports = {
-	pathPrefix: '/blog',
 	siteMetadata: {
 		siteUrl: `https://randydeleon.com`
 	},
