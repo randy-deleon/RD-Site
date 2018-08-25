@@ -15,6 +15,14 @@ const PulishedDate = styled.small`
     letter-spacing: 1px;
     text-transform: uppercase;
 `;
+const TimeToRead = styled.small`
+    color: #e54b4b;
+    border: 1px solid #e54b4b;
+    border-radius: 4px;
+    padding: 2px 5px;
+    margin-left: 15px;
+`;
+
 const PreviewDescription = styled.p`
     margin-top:15px;
 `;
@@ -50,11 +58,16 @@ export default ({ article }) => (
       </PreviewLink>
     </h3>
     <PulishedDate>{article.publishDate}</PulishedDate>
+    <TimeToRead>
+      {article.description.childMarkdownRemark.timeToRead} min read
+    </TimeToRead>
+
     <PreviewDescription
       dangerouslySetInnerHTML={{
         __html: article.description.childMarkdownRemark.html,
       }}
     />
+
     </Articles>
   </ArticlesContainer>
 )

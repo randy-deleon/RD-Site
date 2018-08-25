@@ -42,7 +42,6 @@ class ArticleIndex extends Component {
         <Helmet title="Blog"/>
         <ArticleContainer>
           <Title className="section-headline">Blog</Title>
-
           <ArticleList>
             {posts.map(({ node }) => {
               return (
@@ -79,6 +78,7 @@ export const pageQuery = graphql`
           description {
             childMarkdownRemark {
               html
+              timeToRead
             }
           }
         }
