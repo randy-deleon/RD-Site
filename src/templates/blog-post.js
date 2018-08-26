@@ -1,14 +1,14 @@
-// @ts-nocheck
 import React, {Component, Fragment} from 'react'
 import Helmet from 'react-helmet'
 import get from 'lodash/get'
-import Img from 'gatsby-image'
 import styled from 'styled-components'
 
 const BlogContainer = styled.div`
   background-color:#fff;
-  padding-bottom:30px;
+  padding:10px;
+  border-top: 5px solid #e54b4b;
 `;
+
  const BlogTitle = styled.h1`
   font-size: 1.45rem;
   line-height: 1;
@@ -23,11 +23,19 @@ const BlogContainer = styled.div`
   margin-left: 15px;
  `;
 
+ const BlogTimeToRead = styled.small`
+  color: #555;
+  margin-left: 15px;
+`;
+
  const BlogContent = styled.div`
   margin: 0px 0px 30px 0;
   padding:15px;
-  & ol{
+  & ol {
     margin:0px 20px;
+    & li {
+      margin:10px 0px;
+    }
   }
   & a {
     color:#e54b4b;
@@ -52,7 +60,6 @@ const BlogContainer = styled.div`
     width:100%;
   }
  `;
-
 class BlogPostTemplate extends Component {
   render() {
     const post = get(this.props, 'data.contentfulBlogPost')
@@ -60,21 +67,14 @@ class BlogPostTemplate extends Component {
       <Fragment>
         <Helmet title={`Blog - ${post.title}`} />
         <BlogContainer>
-            <Img
-               title={post.title}
-               sizes={post.heroImage.sizes}
-              alt={post.title}
-            />
-
           <BlogTitle>{post.title}</BlogTitle>
           <BlogDate>{post.publishDate}</BlogDate>
-
+          <BlogTimeToRead>{post.body.childMarkdownRemark.timeToRead} min read</BlogTimeToRead>
           <BlogContent
             dangerouslySetInnerHTML={{
               __html: post.body.childMarkdownRemark.html,
             }}
           />
-
         </BlogContainer>
         </Fragment>
     )
@@ -88,17 +88,10 @@ export const pageQuery = graphql`
     contentfulBlogPost(slug: { eq: $slug }) {
       title
       publishDate(formatString: "MMMM Do, YYYY")
-      heroImage {
-        file {
-          url
-        }
-        sizes( maxHeight: 250 ){
-          ...GatsbyContentfulSizes
-        }
-      }
       body {
         childMarkdownRemark {
           html
+          timeToRead
         }
       }
     }

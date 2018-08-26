@@ -1,10 +1,10 @@
 import React from 'react'
 import Link from 'gatsby-link'
-import Img from 'gatsby-image'
 import styled from 'styled-components'
 
 const ArticlesContainer = styled.div`
     background-color:#fff;
+    border-top: 5px solid #e54b4b;
 `;
 const Articles = styled.div`
     padding:15px;
@@ -16,13 +16,9 @@ const PulishedDate = styled.small`
     text-transform: uppercase;
 `;
 const TimeToRead = styled.small`
-    color: #e54b4b;
-    border: 1px solid #e54b4b;
-    border-radius: 4px;
-    padding: 2px 5px;
+    color: #555;
     margin-left: 15px;
 `;
-
 const PreviewDescription = styled.p`
     margin-top:15px;
 `;
@@ -45,7 +41,7 @@ const PreviewLink = styled(Link)`
 
 export default ({ article }) => (
   <ArticlesContainer>
-    <Img sizes={article.heroImage.sizes} title={article.title} />
+    {/* <Img sizes={article.heroImage.sizes} title={article.title} /> */}
     <Articles>
     <h3>
       <PreviewLink to={`/blog/${article.slug}`}>
@@ -61,13 +57,11 @@ export default ({ article }) => (
     <TimeToRead>
       {article.description.childMarkdownRemark.timeToRead} min read
     </TimeToRead>
-
     <PreviewDescription
       dangerouslySetInnerHTML={{
         __html: article.description.childMarkdownRemark.html,
       }}
     />
-
     </Articles>
   </ArticlesContainer>
 )
