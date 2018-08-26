@@ -41,7 +41,6 @@ const PreviewLink = styled(Link)`
 
 export default ({ article }) => (
   <ArticlesContainer>
-    {/* <Img sizes={article.heroImage.sizes} title={article.title} /> */}
     <Articles>
     <h3>
       <PreviewLink to={`/blog/${article.slug}`}>
@@ -54,9 +53,7 @@ export default ({ article }) => (
       </PreviewLink>
     </h3>
     <PulishedDate>{article.publishDate}</PulishedDate>
-    <TimeToRead>
-      {article.description.childMarkdownRemark.timeToRead} min read
-    </TimeToRead>
+    <TimeToRead>{article.description.childMarkdownRemark.timeToRead} min read</TimeToRead>
     <PreviewDescription
       dangerouslySetInnerHTML={{
         __html: article.description.childMarkdownRemark.html,
