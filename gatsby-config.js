@@ -1,3 +1,5 @@
+const config = require('./src/utils/siteConfig');
+
 let contentfulConfig;
 
 try {
@@ -21,14 +23,23 @@ try {
 
 module.exports = {
 	siteMetadata: {
-		siteUrl: `https://randydeleon.com`
+		siteUrl: config.siteUrl,
+		description: config.siteDescription,
+		rssMetadata: {
+			site_url: `${config.siteUrl}/blog`,
+			feed_url: `${config.siteUrl}/rss.xml`,
+			title: config.siteTitle,
+			description: config.siteDescription,
+			image_url: `${config.siteUrl}${config.siteLogo}`,
+			author: config.author,
+			copyright: config.copyright
+		}
 	},
 	plugins: [
-		`gatsby-transformer-sharp`,
 		`gatsby-transformer-remark`,
-		`gatsby-plugin-styled-components`,
+		`gatsby-transformer-sharp`,
 		`gatsby-plugin-sharp`,
-		`gatsby-plugin-offline`,
+		`gatsby-plugin-styled-components`,
 		'gatsby-plugin-react-helmet',
 		{
 			resolve: 'gatsby-source-contentful',
@@ -41,17 +52,24 @@ module.exports = {
 			}
 		},
 		{
+			resolve: `gatsby-plugin-canonical-urls`,
+			options: {
+				siteUrl: config.siteUrl,
+			}
+		},
+		`gatsby-plugin-offline`,
+		{
 			resolve: `gatsby-plugin-manifest`,
 			options: {
-				name: 'Randy De Leon',
-				short_name: 'RD',
+				name: config.siteTitle,
+				short_name: config.shortName,
 				start_url: '/',
 				scope: '/',
-				background_color: '#F5F5F4',
-				theme_color: '#e54b4b',
+				background_color: config.backgroundColor,
+				theme_color: config.themeColor,
 				display: 'standalone',
 				orientation: 'portrait',
-				icon: 'src/images/icon.png' // This path is relative to the root of the site.
+				icon: `static${config.siteLogo}` // This path is relative to the root of the site.
 			}
 		},
 		{
@@ -59,34 +77,90 @@ module.exports = {
 			options: {
 				output: `/sitemap.xml`,
 				query: `
-          {
-            site {
-              siteMetadata {
-                siteUrl
-              }
-            }
-            allSitePage {
-              edges {
-                node {
-                  path
-                }
-              }
-            }
-        }`
+				{
+					site {
+					  siteMetadata {
+						siteUrl
+					  }
+					}
+					allSitePage {
+					  edges {
+						node {
+						  path
+						}
+					  }
+					}
+				}`
 			}
 		},
 		{
 			resolve: 'gatsby-plugin-robots-txt',
 			options: {
-				host: 'https://randydeleon.com',
-				sitemap: 'https://randydeleon.com/sitemap.xml',
+				host: config.siteUrl,
+				sitemap: `${config.siteUrl}/sitemap.xml`,
 				policy: [{
 					userAgent: '*',
 					allow: '/'
 				}]
 			}
 		},
-
+		{
+			resolve: 'gatsby-plugin-feed',
+			options: {
+				query: `
+				{
+					site {
+						siteMetadata {
+							rssMetadata {
+							site_url
+							feed_url
+							title
+							description
+							image_url
+							author
+							copyright
+							}
+						}
+					}
+				}
+				`,
+				feeds: [{
+					serialize(ctx) {
+						const rssMetadata = ctx.query.site.siteMetadata.rssMetadata
+						return ctx.query.allContentfulBlogPost.edges.map(edge => ({
+							date: edge.node.publishDate,
+							title: edge.node.title,
+							description: edge.node.body.childMarkdownRemark.excerpt,
+							url: rssMetadata.site_url + '/' + edge.node.slug,
+							guid: rssMetadata.site_url + '/' + edge.node.slug,
+							custom_elements: [{
+								'content:encoded': edge.node.body.childMarkdownRemark.html,
+							}, ],
+						}))
+					},
+					query: `
+					{
+					allContentfulBlogPost(limit: 1000, sort: {fields: [publishDate], order: DESC}) {
+					 edges {
+					   node {
+						 title
+						 slug
+						 publishDate(formatString: "MMMM DD, YYYY")
+						 body {
+						   childMarkdownRemark {
+							 html
+							 excerpt(pruneLength: 80)
+						   }
+						 }
+					   }
+					 }
+				   }
+				 }
+				`,
+					output: '/rss.xml',
+				}, ],
+			},
+		},
 		{
 			resolve: `gatsby-plugin-google-analytics`,
 			options: {

@@ -15,7 +15,7 @@ const Name = styled.h1`
 const Title = styled.h2`
   letter-spacing: 5px;
   font-size: 1em;
-  margin:-10px 0 30px;
+  margin:-10px 0 0;
   text-transform: uppercase;
 `;
 
@@ -40,7 +40,7 @@ const TwitterIcon = styled.svg`
 `;
 
 const Description = styled.p`
-    margin: 30px 0 5px 0px;
+    margin: 30px 0;
 `;
 
 const BlogLink = styled(Link)`
