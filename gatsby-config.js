@@ -23,6 +23,7 @@ try {
 
 module.exports = {
 	siteMetadata: {
+		title: config.siteTitle,
 		siteUrl: config.siteUrl,
 		description: config.siteDescription,
 		rssMetadata: {

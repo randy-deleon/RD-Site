@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { Fragment } from 'react'
+import React from 'react'
 import Link from 'gatsby-link'
 import Logo from './logo'
 import styled from 'styled-components'
