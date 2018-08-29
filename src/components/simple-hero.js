@@ -18,13 +18,27 @@ const Title = styled.h2`
   margin:-10px 0 0;
   text-transform: uppercase;
 `;
-
+const BlogLink = styled(Link)`
+  text-decoration:none;
+  margin: 0px 5px;
+  padding: 5px 20px;
+  font-weight: 600;
+  color:#555;
+  &:hover ${BlogLink} {
+    color: #e54b4b;
+    text-decoration:underline;
+  }
+`;
 const IconLink = styled.a`
   display: inline-block;
   width:90px;
-  height:55px;
+  height:40px;
   overflow:hidden;
   border:none;
+  margin-top: 15px;
+  & svg {
+    height:35px;
+  }
 `;
 
 const GithubIcon = styled.svg`
@@ -43,17 +57,7 @@ const Description = styled.p`
     margin: 30px 0;
 `;
 
-const BlogLink = styled(Link)`
-  text-decoration:none;
-  margin: 0px 5px;
-  padding: 5px 20px;
-  font-weight: 600;
-  color:#555;
-  &:hover ${BlogLink} {
-    color: #e54b4b;
-    text-decoration:underline;
-  }
-`;
+
 export default ({ person }) => (
   <SimpleHero>
     <Logo />
@@ -62,7 +66,6 @@ export default ({ person }) => (
     <Description>{person.node.shortBio.shortBio}</Description>
     <br />
     <BlogLink to="/blog/" title="blog">CHECK OUT MY BLOG</BlogLink>
-    <br />
     <br />
       <IconLink href="https://github.com/randy-deleon" className="icon-link">
     <GithubIcon aria-labelledby="github" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

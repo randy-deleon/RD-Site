@@ -9,7 +9,7 @@ const Footer = styled.footer`
 
 const Copyright = styled.div`
     text-align: center;
-    font-size: 12px;
+    font-size: 0.9em;
     margin-top: 10px;
 `;
 
