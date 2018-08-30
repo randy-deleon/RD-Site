@@ -160,20 +160,11 @@ module.exports = {
 				display: 'standalone',
 				orientation: 'portrait',
 				icon: `static${config.siteLogo}`, // This path is relative to the root of the site.
-				icons: [{
+				icons: [
 						// Everything in /static will be copied to an equivalent
 						// directory in /public during development and build, so
 						// assuming your favicons are in /favicons,
 						// you can reference them here
-						src: `/images/icons/icon-16x16.png`,
-						sizes: `16x16`,
-						type: `image/png`,
-					},
-					{
-						src: `/images/icons/icon-32x32.png`,
-						sizes: `32x32`,
-						type: `image/png`,
-					},
 					{
 						src: `/images/icons/icon-48x48.png`,
 						sizes: `48x48`,
@@ -213,12 +204,8 @@ module.exports = {
 						src: `/images/icons/icon-512x512.png`,
 						sizes: `512x512`,
 						type: `image/png`,
-					},
-					{
-						src: `/images/icons/apple-touch-icon.png`,
-						sizes: `180x180`,
-						type: `image/png`,
-					},
+					}
+
 				],
 			}
 		},
