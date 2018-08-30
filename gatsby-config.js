@@ -58,19 +58,15 @@ module.exports = {
 				siteUrl: config.siteUrl,
 			}
 		},
-		`gatsby-plugin-offline`,
 		{
-			resolve: `gatsby-plugin-manifest`,
+			resolve: 'gatsby-plugin-robots-txt',
 			options: {
-				name: config.siteTitle,
-				short_name: config.shortName,
-				start_url: '/',
-				scope: '/',
-				background_color: config.backgroundColor,
-				theme_color: config.themeColor,
-				display: 'standalone',
-				orientation: 'portrait',
-				icon: `static${config.siteLogo}` // This path is relative to the root of the site.
+				host: config.siteUrl,
+				sitemap: `${config.siteUrl}/sitemap.xml`,
+				policy: [{
+					userAgent: '*',
+					allow: '/'
+				}]
 			}
 		},
 		{
@@ -92,17 +88,6 @@ module.exports = {
 					  }
 					}
 				}`
-			}
-		},
-		{
-			resolve: 'gatsby-plugin-robots-txt',
-			options: {
-				host: config.siteUrl,
-				sitemap: `${config.siteUrl}/sitemap.xml`,
-				policy: [{
-					userAgent: '*',
-					allow: '/'
-				}]
 			}
 		},
 		{
@@ -161,6 +146,81 @@ module.exports = {
 					output: '/rss.xml',
 				}, ],
 			},
+		},
+		`gatsby-plugin-offline`,
+		{
+			resolve: `gatsby-plugin-manifest`,
+			options: {
+				name: config.siteTitle,
+				short_name: config.shortName,
+				start_url: '/',
+				scope: '/',
+				background_color: config.backgroundColor,
+				theme_color: config.themeColor,
+				display: 'standalone',
+				orientation: 'portrait',
+				icon: `static${config.siteLogo}`, // This path is relative to the root of the site.
+				icons: [{
+						// Everything in /static will be copied to an equivalent
+						// directory in /public during development and build, so
+						// assuming your favicons are in /favicons,
+						// you can reference them here
+						src: `/images/icons/icon-16x16.png`,
+						sizes: `16x16`,
+						type: `image/png`,
+					},
+					{
+						src: `/images/icons/icon-32x32.png`,
+						sizes: `32x32`,
+						type: `image/png`,
+					},
+					{
+						src: `/images/icons/icon-48x48.png`,
+						sizes: `48x48`,
+						type: `image/png`,
+					},
+					{
+						src: `/images/icons/icon-72x72.png`,
+						sizes: `72x72`,
+						type: `image/png`,
+					},
+					{
+						src: `/images/icons/icon-96x96.png`,
+						sizes: `96x96`,
+						type: `image/png`,
+					},
+					{
+						src: `/images/icons/icon-144x144.png`,
+						sizes: `144x144`,
+						type: `image/png`,
+					},
+					{
+						src: `/images/icons/icon-192x192.png`,
+						sizes: `192x192`,
+						type: `image/png`,
+					},
+					{
+						src: `/images/icons/icon-256x256.png`,
+						sizes: `256x256`,
+						type: `image/png`,
+					},
+					{
+						src: `/images/icons/icon-384x384.png`,
+						sizes: `384x384`,
+						type: `image/png`,
+					},
+					{
+						src: `/images/icons/icon-512x512.png`,
+						sizes: `512x512`,
+						type: `image/png`,
+					},
+					{
+						src: `/images/icons/apple-touch-icon.png`,
+						sizes: `180x180`,
+						type: `image/png`,
+					},
+				],
+			}
 		},
 		{
 			resolve: `gatsby-plugin-google-analytics`,

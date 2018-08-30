@@ -9,4 +9,8 @@ module.exports = {
     themeColor: '#e54b4b', // Used for Offline Manifest
     siteLogo: '/images/logo.png', // Logo used for SEO, RSS, and App manifest
     copyright: `Copyright © ${(new Date()).getUTCFullYear()} Randy De Leon`, // Copyright string for the RSS feed
+    icon16x16: '/images/icons/icon-16x16.png',
+    icon32x32: '/images/icons/icon-32x32.png',
+    appleIcon180x180: '/images/icons-/apple-touch-icon.png'
+
 }
