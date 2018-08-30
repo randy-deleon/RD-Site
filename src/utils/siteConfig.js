@@ -11,6 +11,6 @@ module.exports = {
     copyright: `Copyright © ${(new Date()).getUTCFullYear()} Randy De Leon`, // Copyright string for the RSS feed
     icon16x16: '/images/icons/icon-16x16.png',
     icon32x32: '/images/icons/icon-32x32.png',
-    appleIcon180x180: '/images/icons-/apple-touch-icon.png'
+    appleIcon180x180: '/images/icons/apple-touch-icon.png'
 
 }
