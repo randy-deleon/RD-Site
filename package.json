@@ -1,11 +1,12 @@
 {
   "name": "rd-site",
-  "description": "My site base of contentful gatsby blog starterkit ",
+  "description": "Randy De Leon's personal blog to help fellow developers build awesome stuff for the web.",
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
     "babel-plugin-styled-components": "^1.5.1",
     "contentful-import": "^7.2.0",
+    "gatsby": "^1.9.277",
     "gatsby-cli": "^1.1.58",
     "gatsby-image": "^1.0.55",
     "gatsby-link": "^1.6.46",
@@ -21,25 +22,23 @@
     "gatsby-plugin-sentry": "^0.1.0",
     "gatsby-plugin-sharp": "^1.6.48",
     "gatsby-plugin-sitemap": "^1.2.25",
+    "gatsby-plugin-sri": "^1.0.3",
     "gatsby-plugin-styled-components": "^2.0.11",
     "gatsby-remark-emoji": "0.0.2",
     "gatsby-source-contentful": "^1.3.38",
     "gatsby-transformer-remark": "^1.7.44",
     "gatsby-transformer-sharp": "^1.6.27",
-    "inquirer": "^6.2.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "rimraf": "^2.6.2",
-    "styled-components": "^3.4.5",
-    "yargs-parser": "^10.0.0"
+    "styled-components": "^3.4.5"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
     "babel-preset-env": "^1.7.0",
     "chalk": "^2.3.1",
     "eslint": "^5.4.0",
-    "eslint-plugin-react": "^7.11.1",
-    "gatsby": "^1.9.277"
+    "eslint-plugin-react": "^7.11.1"
   },
   "keywords": [
     "gatsby",

@@ -38,7 +38,7 @@ export default () => (
     <Logo />
     <Navigation role='navigation'>
     <WhiteLink className='button-link' to='/'>Home</WhiteLink>
-    <WhiteLink className='button-link' to='/blog/'>Blog</WhiteLink>
+    <WhiteLink className='button-link' to='/blog'>Blog</WhiteLink>
   </Navigation>
   </Header>
 );

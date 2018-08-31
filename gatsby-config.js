@@ -41,6 +41,7 @@ module.exports = {
 		`gatsby-transformer-sharp`,
 		`gatsby-plugin-sharp`,
 		`gatsby-plugin-styled-components`,
+		`gatsby-plugin-remove-trailing-slashes`,
 		'gatsby-plugin-react-helmet',
 		{
 			resolve: 'gatsby-source-contentful',
@@ -161,10 +162,10 @@ module.exports = {
 				orientation: 'portrait',
 				icon: `static${config.siteLogo}`, // This path is relative to the root of the site.
 				icons: [
-						// Everything in /static will be copied to an equivalent
-						// directory in /public during development and build, so
-						// assuming your favicons are in /favicons,
-						// you can reference them here
+					// Everything in /static will be copied to an equivalent
+					// directory in /public during development and build, so
+					// assuming your favicons are in /favicons,
+					// you can reference them here
 					{
 						src: `/images/icons/icon-48x48.png`,
 						sizes: `48x48`,
@@ -226,6 +227,12 @@ module.exports = {
 				config: {
 					environment: 'production'
 				}
+			}
+		},
+		{
+			resolve: 'gatsby-plugin-sri',
+			options: {
+				hash: 'sha512' // 'sha256', 'sha384' or 'sha512' ('sha512' = default)
 			}
 		},
 		{

@@ -64,7 +64,7 @@ export default ({ person }) => (
     <Name>{person.node.name}</Name>
     <Title>{person.node.title}</Title>
     <Description>{person.node.shortBio.shortBio}</Description>
-    <BlogLink to="/blog/" title="blog">CHECK OUT MY BLOG</BlogLink>
+    <BlogLink to="/blog" title="blog">CHECK OUT MY BLOG</BlogLink>
     <br />
       <IconLink href="https://github.com/randy-deleon" className="icon-link">
     <GithubIcon aria-labelledby="github" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
