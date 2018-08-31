@@ -41,7 +41,6 @@ module.exports = {
 		`gatsby-transformer-sharp`,
 		`gatsby-plugin-sharp`,
 		`gatsby-plugin-styled-components`,
-		`gatsby-plugin-remove-trailing-slashes`,
 		'gatsby-plugin-react-helmet',
 		{
 			resolve: 'gatsby-source-contentful',
