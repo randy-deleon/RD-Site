@@ -3,7 +3,6 @@ const config = require('./src/utils/siteConfig');
 let contentfulConfig;
 
 try {
-	// @ts-ignore
 	contentfulConfig = require('./.contentful');
 } catch (_) {
 	contentfulConfig = {
@@ -55,18 +54,7 @@ module.exports = {
 		{
 			resolve: `gatsby-plugin-canonical-urls`,
 			options: {
-				siteUrl: config.siteUrl,
-			}
-		},
-		{
-			resolve: 'gatsby-plugin-robots-txt',
-			options: {
-				host: config.siteUrl,
-				sitemap: `${config.siteUrl}/sitemap.xml`,
-				policy: [{
-					userAgent: '*',
-					allow: '/'
-				}]
+				siteUrl: config.siteUrl
 			}
 		},
 		{
@@ -91,6 +79,37 @@ module.exports = {
 			}
 		},
 		{
+			resolve: 'gatsby-plugin-robots-txt',
+			options: {
+				resolveEnv: () => process.env.NETLIFY_ENV,
+				env: {
+					production: {
+						policy: [{
+							userAgent: '*'
+						}],
+						host: config.siteUrl,
+						sitemap: `${config.siteUrl}/sitemap.xml`
+					},
+					'branch-deploy': {
+						policy: [{
+							userAgent: '*',
+							disallow: ['/']
+						}],
+						sitemap: null,
+						host: null
+					},
+					'deploy-preview': {
+						policy: [{
+							userAgent: '*',
+							disallow: ['/']
+						}],
+						sitemap: null,
+						host: null
+					}
+				}
+			}
+		},
+		{
 			resolve: 'gatsby-plugin-feed',
 			options: {
 				query: `
@@ -112,17 +131,17 @@ module.exports = {
 				`,
 				feeds: [{
 					serialize(ctx) {
-						const rssMetadata = ctx.query.site.siteMetadata.rssMetadata
-						return ctx.query.allContentfulBlogPost.edges.map(edge => ({
+						const rssMetadata = ctx.query.site.siteMetadata.rssMetadata;
+						return ctx.query.allContentfulBlogPost.edges.map((edge) => ({
 							date: edge.node.publishDate,
 							title: edge.node.title,
 							description: edge.node.body.childMarkdownRemark.excerpt,
 							url: rssMetadata.site_url + '/' + edge.node.slug,
 							guid: rssMetadata.site_url + '/' + edge.node.slug,
 							custom_elements: [{
-								'content:encoded': edge.node.body.childMarkdownRemark.html,
-							}, ],
-						}))
+								'content:encoded': edge.node.body.childMarkdownRemark.html
+							}]
+						}));
 					},
 					query: `
 					{
@@ -143,9 +162,9 @@ module.exports = {
 				   }
 				 }
 				`,
-					output: '/rss.xml',
-				}, ],
-			},
+					output: '/rss.xml'
+				}]
+			}
 		},
 		`gatsby-plugin-offline`,
 		{
@@ -168,45 +187,44 @@ module.exports = {
 					{
 						src: `/images/icons/icon-48x48.png`,
 						sizes: `48x48`,
-						type: `image/png`,
+						type: `image/png`
 					},
 					{
 						src: `/images/icons/icon-72x72.png`,
 						sizes: `72x72`,
-						type: `image/png`,
+						type: `image/png`
 					},
 					{
 						src: `/images/icons/icon-96x96.png`,
 						sizes: `96x96`,
-						type: `image/png`,
+						type: `image/png`
 					},
 					{
 						src: `/images/icons/icon-144x144.png`,
 						sizes: `144x144`,
-						type: `image/png`,
+						type: `image/png`
 					},
 					{
 						src: `/images/icons/icon-192x192.png`,
 						sizes: `192x192`,
-						type: `image/png`,
+						type: `image/png`
 					},
 					{
 						src: `/images/icons/icon-256x256.png`,
 						sizes: `256x256`,
-						type: `image/png`,
+						type: `image/png`
 					},
 					{
 						src: `/images/icons/icon-384x384.png`,
 						sizes: `384x384`,
-						type: `image/png`,
+						type: `image/png`
 					},
 					{
 						src: `/images/icons/icon-512x512.png`,
 						sizes: `512x512`,
-						type: `image/png`,
+						type: `image/png`
 					}
-
-				],
+				]
 			}
 		},
 		{
