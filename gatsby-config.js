@@ -10,10 +10,7 @@ try {
 		accessToken: process.env.CONTENTFUL_DELIVERY_TOKEN
 	};
 } finally {
-	const {
-		spaceId,
-		accessToken
-	} = contentfulConfig;
+	const { spaceId, accessToken } = contentfulConfig;
 
 	if (!spaceId || !accessToken) {
 		throw new Error('Contentful spaceId and the delivery token need to be provided.');
@@ -48,7 +45,7 @@ module.exports = {
 		{
 			resolve: `gatsby-transformer-remark`,
 			options: {
-				plugins: ['gatsby-remark-emoji']
+				plugins: [ 'gatsby-remark-emoji' ]
 			}
 		},
 		{
@@ -84,25 +81,31 @@ module.exports = {
 				resolveEnv: () => process.env.NETLIFY_ENV,
 				env: {
 					production: {
-						policy: [{
-							userAgent: '*'
-						}],
+						policy: [
+							{
+								userAgent: '*'
+							}
+						],
 						host: config.siteUrl,
 						sitemap: `${config.siteUrl}/sitemap.xml`
 					},
 					'branch-deploy': {
-						policy: [{
-							userAgent: '*',
-							disallow: ['/']
-						}],
+						policy: [
+							{
+								userAgent: '*',
+								disallow: [ '/' ]
+							}
+						],
 						sitemap: null,
 						host: null
 					},
 					'deploy-preview': {
-						policy: [{
-							userAgent: '*',
-							disallow: ['/']
-						}],
+						policy: [
+							{
+								userAgent: '*',
+								disallow: [ '/' ]
+							}
+						],
 						sitemap: null,
 						host: null
 					}
@@ -129,21 +132,24 @@ module.exports = {
 					}
 				}
 				`,
-				feeds: [{
-					serialize(ctx) {
-						const rssMetadata = ctx.query.site.siteMetadata.rssMetadata;
-						return ctx.query.allContentfulBlogPost.edges.map((edge) => ({
-							date: edge.node.publishDate,
-							title: edge.node.title,
-							description: edge.node.body.childMarkdownRemark.excerpt,
-							url: rssMetadata.site_url + '/' + edge.node.slug,
-							guid: rssMetadata.site_url + '/' + edge.node.slug,
-							custom_elements: [{
-								'content:encoded': edge.node.body.childMarkdownRemark.html
-							}]
-						}));
-					},
-					query: `
+				feeds: [
+					{
+						serialize(ctx) {
+							const rssMetadata = ctx.query.site.siteMetadata.rssMetadata;
+							return ctx.query.allContentfulBlogPost.edges.map((edge) => ({
+								date: edge.node.publishDate,
+								title: edge.node.title,
+								description: edge.node.body.childMarkdownRemark.excerpt,
+								url: rssMetadata.site_url + '/' + edge.node.slug,
+								guid: rssMetadata.site_url + '/' + edge.node.slug,
+								custom_elements: [
+									{
+										'content:encoded': edge.node.body.childMarkdownRemark.html
+									}
+								]
+							}));
+						},
+						query: `
 					{
 					allContentfulBlogPost(limit: 1000, sort: {fields: [publishDate], order: DESC}) {
 					 edges {
@@ -162,8 +168,9 @@ module.exports = {
 				   }
 				 }
 				`,
-					output: '/rss.xml'
-				}]
+						output: '/rss.xml'
+					}
+				]
 			}
 		},
 		`gatsby-plugin-offline`,
@@ -178,12 +185,8 @@ module.exports = {
 				theme_color: config.themeColor,
 				display: 'standalone',
 				orientation: 'portrait',
-				icon: `static${config.siteLogo}`, // This path is relative to the root of the site.
+				icon: `static${config.siteLogo}`,
 				icons: [
-					// Everything in /static will be copied to an equivalent
-					// directory in /public during development and build, so
-					// assuming your favicons are in /favicons,
-					// you can reference them here
 					{
 						src: `/images/icons/icon-48x48.png`,
 						sizes: `48x48`,
@@ -249,7 +252,7 @@ module.exports = {
 		{
 			resolve: 'gatsby-plugin-sri',
 			options: {
-				hash: 'sha512' // 'sha256', 'sha384' or 'sha512' ('sha512' = default)
+				hash: 'sha512'
 			}
 		},
 		{
@@ -266,7 +269,7 @@ module.exports = {
 					`Referrer-Policy: same-origin`,
 					`X-Frame-Options: DENY`,
 					`X-Content-Type-Options: nosniff`
-					// "X-Xss-Protection: 1; mode=block", //enabled by the plugin
+					// "X-Xss-Protection: 1; mode=block", //implicitly enabled by the plugin
 				],
 				mergeSecurityHeaders: true,
 				mergeLinkHeaders: true,

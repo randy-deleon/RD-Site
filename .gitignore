@@ -70,6 +70,7 @@ public
 .vscode
 
 # contentful config file
+bin
 contentful
 
 .contentful.json
